@@ -1,0 +1,15 @@
+#include <iostream>
+#include "node.h"
+using namespace std;
+
+int main()
+{
+	Node n(1, 5);
+	Node a(2, 6), b(3, 7);
+	cout << n.getKey() << n.getValue() << n.getLeft() << n.getRight() << endl;
+	n.setLeft(&a);
+	n.setRight(&b);
+	cout << n.getLeft()->getKey() << n.getLeft()->getValue() << n.getRight()->getKey() << n.getRight()->getValue() << endl;
+
+	return 0;
+}
