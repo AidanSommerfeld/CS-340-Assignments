@@ -15,13 +15,16 @@ public:
 	int getTreeDepth();
 	int getTreeNodes();
 	void removeTree(Node* root);
-	~BT();
+
+	void printTree();
+	void printHelper(Node* root);
+	~BT(); 
 
 
 private:
 	Node* root = new Node;
 	int totalTreeDepth;
 	int totalTreeNodes;
-	int maxNodes;
+	int maxNodes = 10000;
 };
 #endif
