@@ -1,11 +1,15 @@
 #include "BinaryTree.h"
+#include <iostream>
 #include <ctime>
 #include <stdlib.h>
 using namespace std;
 BT::BT()
 {
-	root.setKey(rand() % 10);
-	root.setValue(rand() % 10000);
+	cout << "begin" << endl;
+	root->setKey(rand() % 10);
+	cout << "Set a key" << endl;
+	root->setValue(rand() % 10000);
+	cout << "Set a value" << endl;
 	totalTreeDepth = 0;
 	totalTreeNodes = 1;
 	maxNodes = 1;	               //arbitrary number since the user is obligated to enter a number this value should never be hit (unless of course the user chooses 1)
@@ -13,8 +17,8 @@ BT::BT()
 
 BT::BT(int nodes)
 {
-	root.setKey(rand() % 10);
-	root.setValue(rand() % 10000);
+	root->setKey(rand() % 10);
+	root->setValue(rand() % 10000);
 	totalTreeDepth = 0;
 	totalTreeNodes = 1;
 	maxNodes = nodes;
@@ -85,7 +89,7 @@ void BT::insertRandomNode()
 	if (maxNodes > totalTreeNodes)
 	{
 		int depth = 0;
-		randomHelper(&root, depth);
+		randomHelper(root, depth);
 		incrementNodes();
 	}
 }
@@ -107,5 +111,5 @@ void BT::removeTree(Node* root)
 
 BT::~BT()
 {
-	removeTree(&root);
+	removeTree(root);
 }
