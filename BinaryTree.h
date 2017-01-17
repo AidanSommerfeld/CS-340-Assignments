@@ -17,9 +17,9 @@ public:
 	void removeTree(Node* root);
 	~BT();
 
-	
+
 private:
-	Node root;
+	Node* root = new Node;
 	int totalTreeDepth;
 	int totalTreeNodes;
 	int maxNodes;
