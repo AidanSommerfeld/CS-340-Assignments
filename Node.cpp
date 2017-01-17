@@ -6,15 +6,15 @@ Node::Node()
 {
 	key = 0;
 	value = 0;
-	left = 0;
-	right = 0;
+	left = nullptr;
+	right = nullptr;
 }
 Node::Node(int newKey, int newValue)
 {
 	key = newKey;
 	value = newValue;
-	left = 0;
-	right = 0;
+	left = nullptr;
+	right = nullptr;
 }
 
 void Node::setKey(int newKey)
@@ -56,6 +56,5 @@ Node* Node::getRight()
 
 Node::~Node()           //deletes all values in the node
 {				        // Recursively called by BT destructor? NPost-order traversal
-	delete left;
-	delete right;
+
 }
