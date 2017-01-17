@@ -39,7 +39,7 @@ int main()
 		{
 			cout << '.';
 		}
-		if (i % (frequency * 10) == 0 )
+		if (i % (frequency * 10) == 0 && i != 0 )
 		{
 			cout << endl;
 		}
