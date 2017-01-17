@@ -1,3 +1,20 @@
+/*===================================================
+Node.h
+=====================================================
+
+A header defining a class for nodes that 
+compose a binary tree.
+
+All binary tree headers will refer to this 
+class definition header.
+
+class Node is a recyclable class. While 
+binary trees have no need for the key 
+and value fields, binary search trees and AVL
+trees are heavily reliant on these fields
+for rebalancing.
+===================================================*/
+
 #ifndef NODE_H
 #define NODE_H
 
@@ -6,8 +23,8 @@ class Node
 
 	private:
 
-		Node* left;
-		Node* right;
+		Node* leftBranch;
+		Node* rightBranch;
 
 		int key;		// Determines the branching of a node.
 		int value;		// Arbitrary value container.
