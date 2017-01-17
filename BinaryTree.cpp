@@ -3,6 +3,23 @@
 #include <ctime>
 #include <stdlib.h>
 using namespace std;
+
+void BT::printHelper(Node* root)
+{
+	if (root == nullptr)
+	{
+		return;
+	}
+	printHelper(root->getLeft());
+	printHelper(root->getRight());
+
+	cout << root->getKey() << endl;
+}
+void BT::printTree()
+{
+	cout << "Depth: " << totalTreeDepth << " Node number:" << totalTreeNodes << endl;
+	printHelper(root);
+}
 BT::BT()
 {
 	cout << "begin" << endl;
@@ -12,7 +29,7 @@ BT::BT()
 	cout << "Set a value" << endl;
 	totalTreeDepth = 0;
 	totalTreeNodes = 1;
-	maxNodes = 1;	               //arbitrary number since the user is obligated to enter a number this value should never be hit (unless of course the user chooses 1)
+	maxNodes = 100000;	               //arbitrary number since the user is obligated to enter a number this value should never be hit (unless of course the user chooses 1)
 }
 
 BT::BT(int nodes)
@@ -52,13 +69,14 @@ void BT::randomHelper(Node* root, int& depth)
 
 	if (decide == 0)
 	{
-		if (root->getLeft() == 0)
+		if (root->getLeft() == nullptr)
 		{
 			Node* temp = new Node;
 			temp->setKey(rand() % 10);
 			temp->setValue(rand() % 10000);
+			temp->setLeft(nullptr);
+			temp->setRight(nullptr);
 			root->setLeft(temp);
-			delete temp;
 			addDepth(depth);
 		}
 		else
@@ -68,13 +86,14 @@ void BT::randomHelper(Node* root, int& depth)
 	}
 	else
 	{
-		if (root->getRight() == 0)
+		if (root->getRight() == nullptr)
 		{
 			Node* temp = new Node;
 			temp->setKey(rand() % 10);
 			temp->setValue(rand() % 10000);
+			temp->setLeft(nullptr);
+			temp->setRight(nullptr);
 			root->setRight(temp);
-			delete temp;
 			addDepth(depth);
 		}
 		else
@@ -96,15 +115,12 @@ void BT::insertRandomNode()
 
 void BT::removeTree(Node* root)
 {
-	if (root->getLeft() != 0)
+	if (root == nullptr)
 	{
-		removeTree(root->getLeft());
+		return;
 	}
-	if (root->getRight() != 0)
-	{
-		removeTree(root->getRight());
-	}
-
+	removeTree(root->getLeft());
+	removeTree(root->getRight());
 	delete root;
 
 }
@@ -112,4 +128,5 @@ void BT::removeTree(Node* root)
 BT::~BT()
 {
 	removeTree(root);
+	root = nullptr;
 }
