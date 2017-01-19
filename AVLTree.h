@@ -46,8 +46,8 @@ public:
 	// but you can define an override straight-up in 
 	// the module.
 
-	// void insertNode();
-	// void insertHelper(Node* root, int &depth);
+	void insertNode();
+	void insertHelper(Node* root, int &depth);
 
 	// void removeTree(Node* root);
 };
