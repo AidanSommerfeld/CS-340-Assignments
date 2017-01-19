@@ -7,7 +7,9 @@ A header defining a binary tree class.
 There are no rules as to appending new nodes
 to basic binary trees. Hence, nodes are arbitrarily
 (or, specifically, randomly) added to the tree
-in this implementation.
+in this implementation
+
+Classes BST and AVL are derived from this class.
 ===================================================*/
 
 #ifndef BINARYTREE_H
@@ -17,9 +19,14 @@ in this implementation.
 
 class BT
 {
-	private:
+	// So class BST and AVL can inherit these.
+	
+	protected:
 
-		Node* root = new Node;	// All binary trees are initialized with a root node.
+		// Roots need to be explicitly dynamic here so any tree instance
+		// can likewise be de-allocated without issue.
+
+		Node* root = new Node;
 
 		// The following values are used for experimental statistic verification.
 
@@ -49,8 +56,8 @@ class BT
 
 	// Node insertion. Has a recursive helper function.
 	
-		void insertRandomNode();
-		void randomHelper(Node* root, int &depth);
+		void insertNode();
+		void insertHelper(Node* root, int &depth);
 
 	// Functions to calculate or return tree statistics.
 	
@@ -62,7 +69,7 @@ class BT
 		int getTreeDepth();
 		int getTreeNodes();
 
-		void removeTree(Node* root);		
+		void removeNode(Node* root);		
 	
 };
 
