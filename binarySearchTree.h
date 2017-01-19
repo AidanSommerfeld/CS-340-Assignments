@@ -37,8 +37,9 @@ class BST : public BT
 		void insertNode();
 		void insertHelper(Node* root, int& depth);
 
-		// These functions are called by the 
-		// BST insertion algorithm.
+		// Search functions for the leftmost and rightmost node.
+		// Do we need these? Probably not. I'll implement them
+		// if I have time.
 
 		void find();
 		void findMin();
