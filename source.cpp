@@ -36,6 +36,7 @@
 
 #include "binaryTree.h"
 #include "binarySearchTree.h"
+#include "AVL.h"
 #include "node.h"
 
 using namespace std;
@@ -70,7 +71,7 @@ int main()
 
 		for (int j = 0; j < nodeNumber; j++)
 		{
-			tree->insertRandomNode();
+			tree->insertNode();
 		}
 
 		totalNodeCount += tree->getTreeNodes();
