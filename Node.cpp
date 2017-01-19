@@ -49,6 +49,14 @@ int Node::getRightHeight()
 {
 	return rightHeight;
 }
+void Node::setLeftHeight(int num)
+{
+	leftHeight = num;
+}
+void Node::setRightHeight(int num)
+{
+	rightHeight = num;
+}
 void Node::incrementLeftHeight()
 {
 	leftHeight++;
