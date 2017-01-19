@@ -23,8 +23,8 @@ class Node
 
 	private:
 
-		Node* leftBranch;
-		Node* rightBranch;
+		Node* left;
+		Node* right;
 
 		int key;		// Determines the branching of a node.
 		int value;		// Arbitrary value container.
@@ -51,13 +51,15 @@ class Node
 		int getKey();
 		int getValue();
 	
-	//AVL ONLY FUNCTIONS//
+	// AVL-specific functions.
 		int getLeftHeight();
 		int getRightHeight();
 		void setLeftHeight(int num);
 		void setRightHeight(int num);
 		void incrementLeftHeight();
 		void incrementRightHeight();
+	// An operator overload for AVL rotations.
+		void operator= (Node* node2);
 
 	// Initializes branch nodes of a root. 
 	// Note that any branch node is its own root, so this should call a Node() constructor.
@@ -73,8 +75,6 @@ class Node
 		Node* getLeft();
 		Node* getRight();
 	
-	// An operator overload for AVL rotations.
-		void operator= (Node* node2);
 };
 
 #endif
