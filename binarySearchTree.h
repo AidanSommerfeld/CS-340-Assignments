@@ -37,13 +37,24 @@ class BST : public BT
 		void insertNode();
 		void insertHelper(Node* root, int& depth);
 
-		// Search functions for the leftmost and rightmost node.
-		// Do we need these? Probably not. I'll implement them
-		// if I have time.
+		Node* find(int value, Node* node);
+		Node* findMin(Node* root);
+		Node* findMax(Node* root);
+		
+	/* The following functions are inherited from 
+	   class BT with no overrides or overloads:	   
+	
+		void addDepth(int nodeDepth);
+		void incrementNodes(); 
 
-		void find();
-		void findMin();
-		void findMax();
+		int getTreeDepth();
+		int getTreeNodes();
+
+		void printHelper(Node* root);
+		void printTree();
+
+		void removeNode(Node* root);	
+	*/
 };
 
 #endif
