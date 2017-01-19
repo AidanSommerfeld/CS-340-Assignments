@@ -29,8 +29,8 @@ class Node
 		int key;		// Determines the branching of a node.
 		int value;		// Arbitrary value container.
 	
-		int leftHeight;           //NOTE:
-		int rightHeight;          // These values are only used for AVL trees
+		int leftHeight;         // NOTE:
+		int rightHeight;        // These fields are used only by AVL trees.
 
 	public:
 
@@ -58,24 +58,22 @@ class Node
 		void setRightHeight(int num);
 		void incrementLeftHeight();
 		void incrementRightHeight();
-	///////////////////////
-
 
 	// Initializes branch nodes of a root. 
 	// Note that any branch node is its own root, so this should call a Node() constructor.
 	
 	// Dev note: could we omit these if class BT was a friend class to class Node?
+	// Waste of time, probably.
 
 		void setLeft(Node* newNode);    
-		void setRight(Node* newNode);  
-		
+		void setRight(Node* newNode);  		
 		
 	// Returns the address of any branches. These should return some invalid value if uninitialized.
 
 		Node* getLeft();
 		Node* getRight();
 	
-	//Operator is for the easy implementation of rotation in avl
+	// An operator overload for AVL rotations.
 		void operator= (Node* node2);
 };
 
