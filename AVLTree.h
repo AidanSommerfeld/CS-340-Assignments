@@ -1,37 +1,55 @@
 #ifndef AVLTREE_H
 #define AVLTREE_H
-#include "node.h"
+
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
+
+#include "node.h"
+#include "binaryTree.h"
+
 using namespace std;
 
-class AVL
+class AVL : public BT
 {
-private:
+
+/* If we make the member variables protected in BinaryTree.h this should work fine.
+
+protected:
+
 	Node* root = new Node;
 
 	int totalTreeDepth;
 	int totalTreeNodes;
 	int maxNodes;
+	
+*/
+	
 public:
 	AVL();
 	AVL(int nodes);
-	~AVL();
-
-	void addDepth(int nodeDepth);
-	void incrementNodes();
+	~AVL();	
 
 	void printHelper(Node* root);
 	void printTree();
+	
+	// void addDepth(int nodeDepth);
+	// void incrementNodes(); 
 
-	int getTreeDepth();
-	int getTreeNodes();
+	// int getTreeDepth();
+	// int getTreeNodes();
+	
+	// If you see this, just a note that I'm
+	// probably going to rename the insert function 
+	// BinaryTree.h this exact way so it can be 
+	// inherited and then overrode. IIRC
+	// there's no need to declare an inherited function,
+	// but you can define an override straight-up in 
+	// the module.
 
+	// void insertNode();
+	// void insertHelper(Node* root, int &depth);
 
-	void insertRandomNode();
-	void randomHelper(Node* root, int &depth);
-
-
-	void removeTree(Node* root);
+	// void removeTree(Node* root);
 };
+
 #endif
