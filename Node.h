@@ -54,6 +54,8 @@ class Node
 	//AVL ONLY FUNCTIONS//
 		int getLeftHeight();
 		int getRightHeight();
+		void setLeftHeight(int num);
+		void setRightHeight(int num);
 		void incrementLeftHeight();
 		void incrementRightHeight();
 	///////////////////////
