@@ -82,34 +82,18 @@ Node* Node::getRight()
 // AVL tree-specific operations.
 
 // Height operations.
-int Node::getLeftHeight()
+int Node::getHeight()
 {
-	return leftHeight;
+	return height;
+}
+void Node::setHeight(int num)
+{
+	height = num;
 }
 
-int Node::getRightHeight()
+void Node::incrementHeight()
 {
-	return rightHeight;
-}
-
-void Node::setLeftHeight(int num)
-{
-	leftHeight = num;
-}
-
-void Node::setRightHeight(int num)
-{
-	rightHeight = num;
-}
-
-void Node::incrementLeftHeight()
-{
-	leftHeight++;
-}
-
-void Node::incrementRightHeight()
-{
-	rightHeight++;
+	height++;
 }
 
 void Node::operator= (Node* node2)
