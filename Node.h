@@ -52,12 +52,9 @@ class Node
 		int getValue();
 	
 	// AVL-specific functions.
-		int getLeftHeight();
-		int getRightHeight();
-		void setLeftHeight(int num);
-		void setRightHeight(int num);
-		void incrementLeftHeight();
-		void incrementRightHeight();
+		int getHeight();
+		void setHeight(int num);
+		void incrementHeight();
 	// An operator overload for AVL rotations.
 		void operator= (Node* node2);
 
