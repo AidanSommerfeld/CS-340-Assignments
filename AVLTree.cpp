@@ -62,6 +62,8 @@ bool AVL::searchHelper(Node *root, bool &found, int num)
 }   
 
 int AVL::max(int a, int b)
+/* In context, the max function only compares the heights
+   of left / right subtrees. */
 {
 	if (a > b)
 		return a;
@@ -69,23 +71,28 @@ int AVL::max(int a, int b)
 		return b;
 }
 
-// Rotation functions.
+/*===================================================
+// Rotation functions.                             */
+
+// Single-rotation functions.
+// Called by double rotations as well.
 
 Node *AVL::RR(Node *original)
 {
 	Node *temp1 = new Node;
 	Node *temp2 = new Node;
 
-	temp1 = original->getLeft(); //sets temp 1 as left of original
-	temp2 = temp1->getRight();   // sets temp 2 as the right of original
+	temp1 = original->getLeft(); // Sets temp1 as left of original.
+	temp2 = temp1->getRight();   // Sets temp2 to the right of original.
 								 //       O
 								 //    T1   
-								 //		  T2
+								 //	  T2
 	                             // ---------------
-	temp1->setRight(original);   //sets the right of temp 1 to original
-	original->setLeft(temp2);	 //sets the left of original to temp 2
+	temp1->setRight(original);   // Sets the right of temp1 to original.
+	original->setLeft(temp2);    // Sets the left of original to temp2.
+				     // The final result moves the original node as shown below.
 								 //       T1
-								 //			  O
+								 //		O
 								 //       t2
 								 // ---------------
 	temp1->setHeight(max(temp1->getLeft()->getHeight(), temp1->getRight()->getHeight())+1);
@@ -93,58 +100,93 @@ Node *AVL::RR(Node *original)
 
 	return temp1;
 }
+
 Node *AVL::LL(Node *original)
 {
 	Node *temp1 = new Node;
 	Node *temp2 = new Node;
 
-	temp1 = original->getRight(); //sets temp 1 as right of original
-	temp2 = temp1->getLeft();     // sets temp 2 as the left of temp 1
+	temp1 = original->getRight(); // Sets temp1 as right of original node.
+	temp2 = temp1->getLeft();     // Sets temp2 as the left of temp1.
 								  //       O
 								  //         T1
 								  //	  T2
 								  // ---------------
-	temp1->setLeft(original);     //sets the left of temp 1 to original
-	original->setRight(temp2);	  //sets the right of original to temp 2
+	temp1->setLeft(original);     // Sets the left of temp1 to original.
+	original->setRight(temp2);    // Sets the right of original to temp2.
+				      // The final result moves the original node as shown below.
 								  //       T1
 								  //	O
 								  //       t2
 								  // ---------------
+	
+	// Resets the height value of the repositioned nodes.
+	
 	original->setHeight(max(original->getLeft()->getHeight(), original->getRight()->getHeight()) + 1);
 	temp1->setHeight(max(temp1->getLeft()->getHeight(), temp1->getRight()->getHeight()) + 1);
 
 	return temp1;
 }
+
+// Double-rotation functions.
+
 Node *AVL::LR(Node *original)
 {
 	RR(original->getLeft());
 	LL(original);
 	return original;
 }
+
 Node *AVL::RL(Node *original)
 {
 	LL(original->getRight());
 	RR(original);
 	return original;
 }
-/////////////////////////////
+
+/*===================================================
+// Insertion functions.                             */
+
+void AVL::insertNode()
+/* The AVL node insertion override of the base BT insertion function. */
+{
+	if (maxNodes >= totalTreeNodes)
+	{
+		int randomKey;
+
+		//do
+		//{
+			randomKey = rand() % 10000;
+		//} while (searchTree(randomKey) == false);
+
+		int depth = 0;
+		insertHelper(root, depth, randomKey);
+		incrementNodes();
+		addDepth(depth);
+	}
+}
+
 void AVL::insertHelper(Node *root, int& depth, int keyValue)
+/* Recursive helper function of insertNode. */
 {
 	depth++;
+	
 	if (root->getKey() > keyValue)
 	{
 		if (root->getLeft() == nullptr)
 		{
+			// Create node immediately if no child exists on left.
 			Node *temp = new Node(keyValue, rand() % 10000);
 			root->setLeft(temp);
 		}
 		else
 		{
+			// Recursive call; compare key against existing left subtree node.
 			root->incrementHeight();
 			insertHelper(root->getLeft(), depth, keyValue);
 		}
 	}
-	else
+	else	// Attempts to create a node on the right if child key > root key.
 	{
 		if (root->getRight() == nullptr)
 		{
@@ -157,7 +199,8 @@ void AVL::insertHelper(Node *root, int& depth, int keyValue)
 			insertHelper(root->getRight(), depth, keyValue);
 		}
 	}
-
+	
+	// Rotation algorithms.
 
 	int balance = root->getHeight() - root->getHeight();
 	
@@ -178,6 +221,7 @@ void AVL::insertHelper(Node *root, int& depth, int keyValue)
 		LR(root);
 		return;
 	}
+	
 	if (balance < -1 && root->getKey() < root->getRight()->getKey())
 	{
 		RL(root);
@@ -185,29 +229,7 @@ void AVL::insertHelper(Node *root, int& depth, int keyValue)
 	}
 }
 
-
-
-void AVL::insertNode()
-{
-	if (maxNodes >= totalTreeNodes)
-	{
-		int randomKey;
-
-		//do
-		//{
-			randomKey = rand() % 10000;
-		//} while (searchTree(randomKey) == false);
-
-		int depth = 0;
-		insertHelper(root, depth, randomKey);
-		incrementNodes();
-		addDepth(depth);
-	}
-}
-
-
 AVL::~AVL()
-
 {
 	removeTree(root);
 	root = nullptr;
