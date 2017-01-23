@@ -1,6 +1,25 @@
 #include "AVLTree.h"
 using namespace std;
 
+int AVL::calculateHelper(Node* root, int depth)
+{
+
+	if (root == nullptr)
+	{
+		return 0;
+	}
+	int left = calculateHelper(root->getLeft(), depth + 1);
+	int right = calculateHelper(root->getRight(), depth + 1);
+
+	return depth + left + right;
+}
+
+void AVL::calculateDepth()
+{
+	int depth = 0;
+	totalTreeDepth = calculateHelper(root, depth);
+}
+
 int AVL::max(int a, int b)
 {
 	if (a > b)
