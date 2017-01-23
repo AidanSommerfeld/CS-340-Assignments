@@ -66,7 +66,7 @@ the running time for each of the following algorithms (assume the time to execut
   i = 0            (1)
   while i < n      (n + 1)
       j = 0        (n)
-      while j <= i (n2/ 2)
+      while j <= i (n2/ 2)?????/
           s ++     (n)(n)
           j ++     (n)(n)
       i ++         (n)
@@ -77,12 +77,12 @@ the running time for each of the following algorithms (assume the time to execut
 
   s = 0           (1)
   i = 1           (1)
-  while i <= n    (???n)
+  while i <= n    (n + 1)/2
       j = 0       (n)
-      while j < n (n + 1)
+      while j < n (n + 1)(n)
           s ++    (n)(n)
           j ++    (n)(n)
-      i = i * 2   (???)
+      i = i * 2   (n)
 
 3. (8 marks) Using the definition of Big-Oh and Big-Omega, show that:
 
