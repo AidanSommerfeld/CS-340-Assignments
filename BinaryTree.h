@@ -15,7 +15,7 @@ Classes BST and AVL are derived from this class.
 #ifndef BINARYTREE_H
 #define BINARYTREE_H
 
-#include "node.h"
+#include "Node.h"
 
 class BT
 {
@@ -64,7 +64,9 @@ class BT
 	// addDepth adds the depth of a node to the running total.
 
 		void addDepth(int nodeDepth);
-	
+
+		void printHelper(Node* root);
+		void printTree();
 	
 		int calculateHelper(Node* root, int depth);
 		void calculateDepth();
