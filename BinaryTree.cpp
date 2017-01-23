@@ -6,6 +6,25 @@
 
 using namespace std;
 
+int BT::calculateHelper(Node* root, int depth)
+{
+
+	if (root == nullptr)
+	{
+		return 0;
+	}
+	int left = calculateHelper(root->getLeft(), depth + 1);
+	int right = calculateHelper(root->getRight(), depth + 1);
+
+	return depth + left + right;
+}
+
+void BT::calculateDepth()
+{
+	int depth = 0;
+	totalTreeDepth = calculateHelper(root, depth);
+}
+
 BT::BT()
 /* Default constructor. */
 {
