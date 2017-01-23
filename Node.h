@@ -47,12 +47,7 @@ public:
 	void setValue(int newValue);
 
 	int getKey();
-	int getValue();
-
-	//AVL ONLY FUNCTIONS//
-	int getHeight();
-	void setHeight(int num);
-	void incrementHeight();
+	int getValue();	
 
 	// Initializes branch nodes of a root. 
 	// Note that any branch node is its own root, so this should call a Node() constructor.
@@ -68,8 +63,15 @@ public:
 	Node* getLeft();
 	Node* getRight();
 
+	// Functions used specifically by AVL trees.
+
+	int getHeight();
+	void setHeight(int num);
+	void incrementHeight();
+
 	// An operator overload for AVL rotations.
 	void operator= (Node* node2);
+	
 };
 
 #endif
