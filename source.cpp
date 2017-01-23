@@ -31,70 +31,136 @@
 // ======================================================================*/
 
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
-
-#include "binaryTree.h"
-#include "binarySearchTree.h"
-#include "AVL.h"
+#include "BinaryTree.h"
+#include "AVLTree.h"
+#include "BinarySearchTree.h"
 #include "node.h"
-
+#include <stdlib.h>
+#include <ctime>
 using namespace std;
+
+void binaryTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber);
+void avlTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber);
+void bsTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber);
 
 int main()
 {
-	srand(time(0));
-
-	float totalNodeCount = 0;
-	float totalDepthCount = 0;
-	float average = 0;
-
-	// Counters for the numbers of trees / nodes built per process.
-
-	int treeNumber;
-	int nodeNumber;
-	int frequency;
-
-	cout << "How many trees would you like to test: ";
-	cin >> treeNumber;
-	cout << "How many nodes will be in each tree: ";
-	cin >> nodeNumber;
+	char quit;
 	do
 	{
-		cout << "please enter a print frequency: ";
-		cin >> frequency;
-		if(frequency < 1)
+		srand(time(0));
+		float totalNodeCount = 0;
+		float totalDepthCount = 0;
+		float average = 0;
+		int treeNumber;
+		int nodeNumber;
+		int frequency;
+		char treeType;
+
+		cout << "What kind of tree would you like to implement? " << endl
+			<< "'a' BT" << endl
+			<< "'b' AVL " << endl
+			<< "'c' BST " << endl << "Tree type: ";
+		do
 		{
-			cout << "The frequency must be 1 or greater." << endl;
-		}
-	} while (frequency < 1);
+			cin >> treeType;
+		} while (treeType != 'a' && treeType != 'b' && treeType != 'c'
+			&& treeType != 'A' && treeType != 'B' && treeType != 'C');
 
-	for (int i = 0; i < treeNumber; i++)
-	{
-
-		BT* tree = new BT;
-
-		for (int j = 0; j < nodeNumber -1; j++)
+		cout << "How many trees would you like to test: ";
+		cin >> treeNumber;
+		cout << "How many nodes will be in each tree: ";
+		cin >> nodeNumber;
+		do
 		{
-			tree->insertNode();
+			cout << "please enter a print frequency: ";
+			cin >> frequency;
+			if (frequency < 1)
+			{
+				cout << "The frequency must be 1 or greater." << endl;
+			}
+		} while (frequency < 1);
+
+		for (int i = 1; i <= treeNumber; i++)
+		{
+
+			if (treeType == 'a' || treeType == 'A')
+			{
+				binaryTree(totalNodeCount, totalDepthCount, nodeNumber);
+			}
+
+			if (treeType == 'b' || treeType == 'B')
+			{
+				avlTree(totalNodeCount, totalDepthCount, nodeNumber);
+			}
+			if (treeType == 'c' || treeType == 'C')
+			{
+				bsTree(totalNodeCount, totalDepthCount, nodeNumber);
+			}
+
+
+			if (i % frequency == 0)
+			{
+				cout << '.';
+			}
+			if (i % (frequency * 10) == 0)
+			{
+				cout << endl;
+			}
 		}
+		cout << endl;
+		average = totalDepthCount / totalNodeCount;
 
-		totalNodeCount += tree->getTreeNodes();
-		totalDepthCount += tree->getTreeDepth();
-		delete tree;
+		cout << "The average depth of this tree is: " << average << endl;
+		cout << "The total number of nodes was: " << fixed << totalNodeCount << " The total depth was: " << fixed << totalDepthCount << endl << endl;
+		cout << "Would you like to quit? (Y/N): ";
+		
+		do {
+			cin >> quit;
+		} while (quit != 'y' && quit != 'Y' && quit != 'n' && quit != 'N');
 
-		if (i % frequency == 0)
-			cout << '.';
-		if (i % (frequency * 10) == 0 && i != 0)
-			cout << endl;
-
-	}
-	cout << endl;
-	average = totalDepthCount / totalNodeCount;
-
-	cout << "The average depth of this tree is: " << average << endl;
-	cout << "The total number of nodes built was: " << fixed << totalNodeCount << '\n'
-		 << "The total depth was: " << fixed << totalDepthCount << endl;
-
+	} while (quit == 'n' || quit == 'N');
 	return 0;
+}
+
+void binaryTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber)
+{
+	BT* tree = new BT(nodeNumber);
+
+	for (int j = 0; j < nodeNumber - 1; j++)
+	{
+		tree->insertRandomNode();
+	}
+	tree->calculateDepth();
+	totalNodeCount += tree->getTreeNodes();
+	totalDepthCount += tree->getTreeDepth();
+	delete tree;
+}
+
+void avlTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber)
+{
+	AVL* tree = new AVL(nodeNumber);
+
+	for (int j = 0; j < nodeNumber - 1; j++)
+	{
+		tree->insertRandomNode();
+	}
+	tree->calculateDepth();
+	totalNodeCount += tree->getTreeNodes();
+	totalDepthCount += tree->getTreeDepth();
+	delete tree;
+}
+
+void bsTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber)
+{
+	BST* tree = new BST(nodeNumber);
+
+	for (int j = 0; j < nodeNumber - 1; j++)
+	{
+		tree->insertRandomNode();
+	}
+	tree->calculateDepth();
+	totalNodeCount += tree->getTreeNodes();
+	totalDepthCount += tree->getTreeDepth();
+	delete tree;
 }
