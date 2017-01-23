@@ -23,8 +23,8 @@ class Node
 
 private:
 
-	Node* left;
-	Node* right;
+	Node *left;
+	Node *right;
 
 	int key;		// Determines the branching of a node.
 	int value;		// Arbitrary value container.
@@ -47,7 +47,7 @@ public:
 	void setValue(int newValue);
 
 	int getKey();
-	int getValue();	
+	int getValue();
 
 	// Initializes branch nodes of a root. 
 	// Note that any branch node is its own root, so this should call a Node() constructor.
@@ -55,13 +55,13 @@ public:
 	// Dev note: could we omit these if class BT was a friend class to class Node?
 	// Waste of time, probably.
 
-	void setLeft(Node* newNode);
-	void setRight(Node* newNode);
+	void setLeft(Node *newNode);
+	void setRight(Node *newNode);
 
 	// Returns the address of any branches. These should return some invalid value if uninitialized.
 
-	Node* getLeft();
-	Node* getRight();
+	Node *getLeft();
+	Node *getRight();
 
 	// Functions used specifically by AVL trees.
 
@@ -70,8 +70,7 @@ public:
 	void incrementHeight();
 
 	// An operator overload for AVL rotations.
-	void operator= (Node* node2);
-	
+	void operator= (Node *node2);
 };
 
 #endif
