@@ -35,7 +35,7 @@ class BST : public BT
 		~BST();
 
 		void insertNode();
-		void insertHelper(Node* root, int& depth);
+		void insertHelper(Node* root, int& depth, int keyValue);
 
 		Node* find(int value, Node* node);
 		Node* findMin(Node* root);
