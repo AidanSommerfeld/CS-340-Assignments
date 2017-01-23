@@ -2,21 +2,18 @@
 #include <iostream>
 
 #include "BinarySearchTree.h"
-using namespace std;
+
 using std::cout;
 using std::endl;
 
 BST::BST()
-/* Default constructor. */
+/*Default constructor. */
 {
 	// While keys matter in BSTs and AVL trees,
 	// we're only initializing the root here. Keep it low.
 
 	root->setKey(rand() % 10);
-	cout << "Key set for root node." << endl;
-
 	root->setValue(rand() % 10000);
-	cout << "Value set for root node." << endl;
 
 	totalTreeDepth = 0;
 	totalTreeNodes = 1;
@@ -25,7 +22,7 @@ BST::BST()
 }
 
 BST::BST(int nodes)
-/* Initializing constructor, given a user input.*/
+/*Initializing constructor, given a user input.*/
 {
 	root->setKey(rand() % 10);
 	root->setValue(rand() % 10000);
@@ -37,7 +34,7 @@ BST::BST(int nodes)
 }
 
 void BST::insertNode()
-/* Overload of BT::insertNode(). */
+/*Overload of BT::insertNode(). */
 {
 	if (maxNodes >= totalTreeNodes)
 	{
@@ -48,8 +45,8 @@ void BST::insertNode()
 	}
 }
 
-void BST::insertHelper(Node* root, int& depth, int keyValue)
-/* Overload of BT::insertHelper(...). */
+void BST::insertHelper(Node *root, int& depth, int keyValue)
+/*Overload of BT::insertHelper(...). */
 {
 	depth++;
 
@@ -58,7 +55,7 @@ void BST::insertHelper(Node* root, int& depth, int keyValue)
 		if (root->getLeft() == nullptr)
 		{
 			// Create node immediately if no child exists on left.
-			Node* temp = new Node(keyValue, rand() % 1000);
+			Node *temp = new Node(keyValue, rand() % 1000);
 			root->setLeft(temp);
 		}
 		else
@@ -73,7 +70,7 @@ void BST::insertHelper(Node* root, int& depth, int keyValue)
 		if (root->getRight() == nullptr)
 		{
 			// If no child exists on right subtree...
-			Node* temp = new Node(keyValue, rand() % 1000);
+			Node *temp = new Node(keyValue, rand() % 1000);
 			root->setRight(temp);
 		}
 		else
@@ -91,13 +88,14 @@ void BST::insertHelper(Node* root, int& depth, int keyValue)
 	// Assumption: 
 	// Inherently, no, but it should cause a lot of 
 	// left-side bias as the tree develops. e.g.:
-	// 1
-	// 73 1000
-	// 23 75 12 10045
+	//           1
+	//       73     1000
+	//     23  75  12   10045
+	//              341 2225
 }
 
-Node* BST::find(int value, Node* node)
-/* Attempts to search for a node containing the key value of the query. */
+Node *BST::find(int value, Node *node)
+/*Attempts to search for a node containing the key value of the query. */
 {
 	// Implies no value matched at end of search, or value exists.
 	if (node == nullptr || value == node->getKey())
@@ -108,8 +106,8 @@ Node* BST::find(int value, Node* node)
 		return find(value, node->getRight());   // ...larger ones on the right.
 }
 
-Node* BST::findMin(Node* root)
-/* Finds the left-most node, which logically has the lowest key value. */
+Node *BST::findMin(Node *root)
+/*Finds the left-most node, which logically has the lowest key value. */
 {
 	if (root == nullptr || root->getLeft() == nullptr) // End of search, else...
 		return root;
@@ -117,8 +115,8 @@ Node* BST::findMin(Node* root)
 	return findMin(root->getLeft()); // Recursive call if null not met.
 }
 
-Node* BST::findMax(Node* root)
-/* Finds the right-most node, which logically has the highest key value.
+Node *BST::findMax(Node *root)
+/*Finds the right-most node, which logically has the highest key value.
 Similar to findMin(). */
 {
 	if (root == nullptr || root->getRight() == nullptr)
