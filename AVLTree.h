@@ -21,6 +21,9 @@ public:
 
 	void addDepth(int nodeDepth);
 	void incrementNodes();
+	
+	int calculateHelper(Node* root, int depth);
+	void calculateDepth();
 
 	void printHelper(Node* root);
 	void printTree();
