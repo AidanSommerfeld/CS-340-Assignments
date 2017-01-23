@@ -1,9 +1,8 @@
 // ======================================================================
 // Binary Tree Generation
 /* ======================================================================
-// Authors:
-// STNO#(s):
-//                                                                     */
+// Authors: Aidan Sommerfeld, Rafael Queypo
+// STNO#(s): 200362730, 200365586                                    */
 // =====================================================================
 /* Class:  CS 340
 // For: Assignment #1
@@ -24,20 +23,21 @@
 //			a new tree is generated, these counters are added to an overall
 //			cumulative counter before the current tree is de-allocated --
 //			then a new tree is generated until the target number of trees 
-//			is built.
-//
-// Major Variables and Constants:
-//
+//			is built.//
 // ======================================================================*/
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 #include "BinaryTree.h"
 #include "AVLTree.h"
 #include "BinarySearchTree.h"
-#include "node.h"
-#include <stdlib.h>
-#include <ctime>
+#include "Node.h"
+
 using namespace std;
+
+// Functions for branching the type of tree to generate.
 
 void binaryTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber);
 void avlTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber);
@@ -49,37 +49,41 @@ int main()
 	do
 	{
 		srand(time(0));
+		
 		float totalNodeCount = 0;
 		float totalDepthCount = 0;
 		float average = 0;
+		
 		int treeNumber;
 		int nodeNumber;
 		int frequency;
 		char treeType;
 
-		cout << "What kind of tree would you like to implement? " << endl
-			<< "'a' BT" << endl
-			<< "'b' AVL " << endl
-			<< "'c' BST " << endl << "Tree type: ";
+		cout << "What kind of tree to implement? " << endl
+			<< "[a] BT" << endl
+			<< "[b] AVL " << endl
+			<< "[c] BST " << endl << "Tree type: ";
 		do
 		{
 			cin >> treeType;
 		} while (treeType != 'a' && treeType != 'b' && treeType != 'c'
 			&& treeType != 'A' && treeType != 'B' && treeType != 'C');
 
-		cout << "How many trees would you like to test: ";
+		cout << "Test how many trees?: ";
 		cin >> treeNumber;
-		cout << "How many nodes will be in each tree: ";
+		cout << "Generate how many nodes per tree?: ";
 		cin >> nodeNumber;
 		do
 		{
-			cout << "please enter a print frequency: ";
+			cout << "Enter a print frequency: ";
 			cin >> frequency;
 			if (frequency < 1)
 			{
-				cout << "The frequency must be 1 or greater." << endl;
+				cout << "Frequency must be 1 or greater." << endl;
 			}
 		} while (frequency < 1);
+		
+		// Branch instructions for tree type.
 
 		for (int i = 1; i <= treeNumber; i++)
 		{
@@ -97,7 +101,8 @@ int main()
 			{
 				bsTree(totalNodeCount, totalDepthCount, nodeNumber);
 			}
-
+			
+			// Prints a progress marker per n trees and flushes lines.
 
 			if (i % frequency == 0)
 			{
@@ -108,12 +113,14 @@ int main()
 				cout << endl;
 			}
 		}
+		
 		cout << endl;
 		average = totalDepthCount / totalNodeCount;
 
 		cout << "The average depth of this tree is: " << average << endl;
-		cout << "The total number of nodes was: " << fixed << totalNodeCount << " The total depth was: " << fixed << totalDepthCount << endl << endl;
-		cout << "Would you like to quit? (Y/N): ";
+		cout << "The total number of nodes was: " << fixed << totalNodeCount << endl
+		     << "The total depth was: " << fixed << totalDepthCount << endl << endl;
+		cout << "Quit? (Y/N): ";
 		
 		do {
 			cin >> quit;
@@ -122,6 +129,8 @@ int main()
 	} while (quit == 'n' || quit == 'N');
 	return 0;
 }
+
+// Functions accessing tree generation by type.
 
 void binaryTree(float& totalNodeCount, float& totalDepthCount, int nodeNumber)
 {
