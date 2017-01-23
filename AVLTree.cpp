@@ -204,6 +204,8 @@ void AVL::insertHelper(Node *root, int& depth, int keyValue)
 
 	int balance = root->getHeight() - root->getHeight();
 	
+	// Note: height balancing here is erratically implemented.
+	
 	if (balance > 1 && root->getKey() < root->getLeft()->getKey())
 	{
 		RR(root);
