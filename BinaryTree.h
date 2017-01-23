@@ -64,6 +64,11 @@ class BT
 	// addDepth adds the depth of a node to the running total.
 
 		void addDepth(int nodeDepth);
+	
+	
+		int calculateHelper(Node* root, int depth);
+		void calculateDepth();
+	
 		void incrementNodes(); 
 
 		int getTreeDepth();
