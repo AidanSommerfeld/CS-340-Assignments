@@ -1,0 +1,100 @@
+2. (6 marks) Count the number of times each instruction executes to determine the running time and Big-Oh of
+the running time for each of the following algorithms (assume the time to execute each individual instruction is 1 time unit):
+
+/* Taking #1 as an example from my notes: */
+
+(a)  Algorithm 1:
+
+  s = 0        (1) assignment
+  i = 0        (1)
+  while i < n  (n + 1) the operation here is the bool evaluation; it's evaluated n times + 1 (last check before exiting)
+      s ++  (n)
+      i ++  (n)
+      
+      n 
+      n
+      n + 1
+          1
+          1
+     ------
+     3n + 3 -> O(n)
+
+(b) Algorithm 2:
+
+  a = a + b
+  c = d * d * d
+  e = 0
+
+(c)  Algorithm 3:
+
+  if a < b
+      a = a + b
+      c = d * d * d
+      e = 0
+  else
+      b = 0
+
+(d) Algorithm 4:
+
+  s = 0
+  i = 0
+  while i < n
+      j = 0
+      while j < n
+          s ++
+          j ++
+      i ++
+
+(e)  Algorithm 5:
+
+  s = 0
+  i = 0
+  while i < n
+      j = 0
+      while j <= i
+          s ++
+          j ++
+      i ++
+
+(f)  Algorithm 6:
+
+  s = 0
+  i = 1
+  while i <= n
+      j = 0
+      while j < n
+          s ++
+          j ++
+      i = i * 2
+
+3. (8 marks) Using the definition of Big-Oh and Big-Omega, show that:
+
+(a)  c1n is Ο(n) and Ω(n).
+
+(b) c2n3 + c3 is Ο(n3) and Ω(n3).
+
+(c)  c4n log n + c5n is Ο(n log n) and Ω(n log n).
+
+(d) c62n + c7n6 is Ο(2n) and Ω(2n).
+
+4. (10 marks) For each of the following pairs of functions, either f(n) is O(g(n)), f(n) is Ω(g(n)), or f(n) = Θ(g(n)). For each pair, determine which relationship is correct. Justify your answer using the method of limits.
+
+(a)  f(n) = log n2; g(n) = log n + 5.
+
+(b) f(n) = sqrt(n); g(n) = log n2.
+
+(c)  f(n) = log2 n; g(n) = log n.
+
+(d) f(n) = n; g(n) = log2 n.
+
+(e)  f(n) = n log n + n; g(n) = log n.
+
+(f)  f(n) = log n2; g(n) = log2 n.
+
+(g) f(n) = 2n; g(n) = 10n2.
+
+(h) f(n) = 2n; g(n) = n log n.
+
+(i)  f(n) = 2n; g(n) = 3n.
+
+(j)  f(n) = 2n; g(n) = nn.
