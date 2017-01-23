@@ -39,31 +39,58 @@ BST::BST(int nodes)
 void BST::insertNode()
 /* Overload of BT::insertNode(). */
 {
-	if (maxNodes > totalTreeNodes)
+	if (maxNodes >= totalTreeNodes)
 	{
 		int depth = 0;
-		BST::insertHelper(root, depth);		// Explicit call to the overload.
+		int randomKey = rand() % 10000;
+		BST::insertHelper(root, depth, randomKey);		// Explicit call to the overload.
 		incrementNodes();
 	}
 }
 
-void BST::insertHelper(Node* root, int& depth)
+void BST::insertHelper(Node* root, int& depth, int keyValue)
 /* Overload of BT::insertHelper(...). */
 {
-	depth++; // ????????
+	depth++;
 
-	// Algorithm:
-	// - Generate a key.
-	// - Compare key against root.
-	// - Branch a subtree compared against root.
-	// - If subtree exists, recursive call.
-	// - If subtree does not exist, generate the node.
+	if (root->getKey() > keyValue) 
+	{
+		if (root->getLeft() == nullptr)
+		{
+			// Create node immediately if no child exists on left.
+			Node* temp = new Node(keyValue, rand() % 1000);
+			root->setLeft(temp);
+		}
+		else
+		{
+			// Recursive call; compare key against existing left subtree node.
+			root->incrementHeight();
+			insertHelper(root->getLeft(), depth, keyValue);
+		}
+	}
+	else   // Attempts to create a node on the right if child key > root key.
+	{
+		if (root->getRight() == nullptr)
+		{
+			// If no child exists on right subtree...
+			Node* temp = new Node(keyValue, rand() % 1000);
+			root->setRight(temp);
+		}
+		else
+		{
+			// For existing right subtrees.
+			root->incrementHeight();
+			insertHelper(root->getRight(), depth, keyValue);
+		}
+	}
 
-	// Issues:
+	// Dev concern:
 	// If a large key is generated early, this causes a 
 	// significant bias to one side of the tree, doesn't it?
+	
+	// Assumption: 
 	// Inherently, no, but it should cause a lot of 
-	// left-side bias as the tree develops.
+	// left-side bias as the tree develops. e.g.:
 	// 1
 	// 73 1000
 	// 23 75 12 10045
