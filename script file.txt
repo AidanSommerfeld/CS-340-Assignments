@@ -1,0 +1,43 @@
+What kind of tree would you like to implement?
+'a' BT
+'b' AVL
+'c' BST
+Tree type: a
+How many trees would you like to test: 16
+How many nodes will be in each tree: 8
+please enter a print frequency: 1
+..........
+......
+The average depth of this tree is: 1.77344
+The total number of nodes was: 128.000000 The total depth was: 227.000000
+
+Would you like to quit? (Y/N): n
+What kind of tree would you like to implement?
+'a' BT
+'b' AVL
+'c' BST
+Tree type: b
+How many trees would you like to test: 16
+How many nodes will be in each tree: 8
+please enter a print frequency: 1
+..........
+......
+The average depth of this tree is: 2.656250
+The total number of nodes was: 128.000000 The total depth was: 340.000000
+
+Would you like to quit? (Y/N): N
+What kind of tree would you like to implement?
+'a' BT
+'b' AVL
+'c' BST
+Tree type: c
+How many trees would you like to test: 16
+How many nodes will be in each tree: 8
+please enter a print frequency: 1
+..........
+......
+The average depth of this tree is: 1.796875
+The total number of nodes was: 128.000000 The total depth was: 230.000000
+
+Would you like to quit? (Y/N): Y
+Press any key to continue . . .
