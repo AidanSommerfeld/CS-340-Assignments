@@ -55,21 +55,26 @@ int main()
 	int nodeNumber;
 	int frequency;
 
-	cout << "Enter the number of binary trees to generate: ";
+	cout << "How many trees would you like to test: ";
 	cin >> treeNumber;
-	cout << "Enter the number of nodes per tree: ";
+	cout << "How many nodes will be in each tree: ";
 	cin >> nodeNumber;
-	cout << "Enter a print frequency." << '\n'
-		 << "(This is a visual counter that prints a dot indicating n trees have been built.): ";
-	cin >> frequency;
-	nodeNumber--;
+	do
+	{
+		cout << "please enter a print frequency: ";
+		cin >> frequency;
+		if(frequency < 1)
+		{
+			cout << "The frequency must be 1 or greater." << endl;
+		}
+	} while (frequency < 1);
 
 	for (int i = 0; i < treeNumber; i++)
 	{
 
 		BT* tree = new BT;
 
-		for (int j = 0; j < nodeNumber; j++)
+		for (int j = 0; j < nodeNumber -1; j++)
 		{
 			tree->insertNode();
 		}
