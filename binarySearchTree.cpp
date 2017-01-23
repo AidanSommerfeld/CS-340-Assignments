@@ -1,8 +1,8 @@
 #include <ctime>
 #include <iostream>
 
-#include "binarySearchTree.h"
-
+#include "BinarySearchTree.h"
+using namespace std;
 using std::cout;
 using std::endl;
 
@@ -53,7 +53,7 @@ void BST::insertHelper(Node* root, int& depth, int keyValue)
 {
 	depth++;
 
-	if (root->getKey() > keyValue) 
+	if (root->getKey() > keyValue)
 	{
 		if (root->getLeft() == nullptr)
 		{
@@ -87,7 +87,7 @@ void BST::insertHelper(Node* root, int& depth, int keyValue)
 	// Dev concern:
 	// If a large key is generated early, this causes a 
 	// significant bias to one side of the tree, doesn't it?
-	
+
 	// Assumption: 
 	// Inherently, no, but it should cause a lot of 
 	// left-side bias as the tree develops. e.g.:
@@ -100,11 +100,11 @@ Node* BST::find(int value, Node* node)
 /* Attempts to search for a node containing the key value of the query. */
 {
 	// Implies no value matched at end of search, or value exists.
-	if (node == nullptr || value == node->getKey)	
+	if (node == nullptr || value == node->getKey())
 		return node;
 	else if (value < node->getKey())			// If subtree exists branch by key value.
 		return find(value, node->getLeft());    // Obviously, smaller values on the left...
-	else 
+	else
 		return find(value, node->getRight());   // ...larger ones on the right.
 }
 
@@ -113,13 +113,13 @@ Node* BST::findMin(Node* root)
 {
 	if (root == nullptr || root->getLeft() == nullptr) // End of search, else...
 		return root;
-	
+
 	return findMin(root->getLeft()); // Recursive call if null not met.
 }
 
 Node* BST::findMax(Node* root)
-/* Finds the right-most node, which logically has the highest key value. 
-   Similar to findMin(). */
+/* Finds the right-most node, which logically has the highest key value.
+Similar to findMin(). */
 {
 	if (root == nullptr || root->getRight() == nullptr)
 		return root;
@@ -129,6 +129,6 @@ Node* BST::findMax(Node* root)
 
 BST::~BST()
 {
-	removeNode(root);
+	removeTree(root);
 	root = nullptr;
 }
