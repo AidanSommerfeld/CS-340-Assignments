@@ -72,4 +72,5 @@ public:
 	void removeTree(Node *root);
 	*/
 };
+
 #endif
