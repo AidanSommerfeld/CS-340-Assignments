@@ -22,9 +22,6 @@
 //			at the same degree / level.
 // ===============================================================================*/
 
-// BUY MY GAME
-// t. OUR GOOD BUDDY, TOOD HOWARD, WHO ART IN VALVE
-
 #include <iostream>
 #include <fstream>
 
