@@ -8,7 +8,10 @@ graphs and the topological sort algorithm.
 #ifndef TOP_SORT_H
 #define TOP_SORT_H
 
-struct Follower; // Structure prototype.
+struct Follower; // Structure prototypes.
+struct Leader;
+
+void BuildList(, Leader *head, Leader *tail, int &vertexCount);
 
 struct Leader
 {
@@ -17,10 +20,9 @@ struct Leader
 	Follower *firstFollower;
 	
 	void TopSort(Leader *head, Leader *tail);
-	void Initialize();
-	void BuildList();
-	void FindStartVertex();
-	void FindPartialOrder();
+	void Initialize(Leader *head, Leader *tail, int &vertexCount);
+	void FindStartVertex(Leader *head, Leader *tail);
+	void FindPartialOrder(Leader *head, Leader *tail, int &vertexCount);
 };
 
 struct Follower
