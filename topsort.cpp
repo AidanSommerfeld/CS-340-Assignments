@@ -104,6 +104,7 @@ void TopSort::PartialOrder(Leader*&head, Leader*&tail, int vertexCount)
 		}
 	}
 }
+
 void TopSort::GetDepths(Leader*&head, Leader*&tail)
 {
 	for (Leader*p = head; p != tail; p = p->nextLeader)
@@ -123,7 +124,7 @@ void TopSort::GetDepths(Leader*&head, Leader*&tail)
 
 void TopSort::Print(Leader*&head, Leader*&tail)
 {
-	cout << "Printing the vertexes" << endl;
+	cout << "Printing the vertices." << endl;
 	int i = 0;
 	while (i <= 25)
 	{
@@ -146,6 +147,38 @@ void TopSort::Print(Leader*&head, Leader*&tail)
 	cout << endl;
 }
 
+void TopSort::ShowStructure (Leader *head, Leader *tail) // Do NOT pass this by reference 
+{
+	int currentLeader = 1;
+	
+	// Notes: these are all struct fields or otherwise accessible.
+	
+	while (head != tail)
+	{
+		cout << "Leader " << currentLeader << endl;
+		cout << "inDegree: " << head->inDegree << endl;
+		cout << "nextLeader: " << head->nextLeader->data << endl;				
+		
+		if (head->firstFollower != nullptr) // If current vertex has any followers then
+		{
+			Leader* current = head->firstFollower; // Should set this to find current vertex.
+			
+			int currFollower = 1;
+			
+			while (curr->nextFollower != nullptr) 
+			{
+				cout << "Follower " << currFollower << ": " << current->firstFollower->adjacentLeader->data << endl;
+				currFollower++;
+				current = current->nextFollower;
+			}
+		}
+		
+		head = head->nextLeader;
+		currentLeader++;
+		cout << endl << endl;
+	}
+}
+
 TopSort::TopSort()
 {
 	vertexCount = 0;
@@ -156,7 +189,7 @@ TopSort::TopSort()
 	PartialOrder(head, tail, vertexCount);
 	if (vertexCount != 0)
 	{
-		cout << "Not a partial order" << endl;
+		cout << "This is not a partial order." << endl;
 	}
 }
 
@@ -279,7 +312,7 @@ void TopSortString::GetDepths(LeaderString*&head, LeaderString*&tail)
 
 void TopSortString::Print(LeaderString*&head, LeaderString*&tail)
 {
-	cout << "Printing the vertexes" << endl;
+	cout << "Printing the vertices." << endl;
 	int i = 0;
 	while (i <= 30)
 	{
@@ -312,6 +345,6 @@ TopSortString::TopSortString()
 	PartialOrder(head, tail, vertexCount);
 	if (vertexCount != 0)
 	{
-		cout << "Not a partial order" << endl;
+		cout << "This is not a partial order." << endl;
 	}
 }
