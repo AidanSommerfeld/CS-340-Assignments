@@ -78,6 +78,7 @@ public:
 	void TopSortString::PartialOrder(LeaderString*&head, LeaderString*&tail, int vertexCount);
 	void TopSortString::GetDepths(LeaderString*&head, LeaderString*&tail);
 	void TopSortString::Print(LeaderString*&head, LeaderString*&tail);
+	void TopSortString::ShowStructure(Leader *head, Leader *tail); // shoud also have public access to
 
 private:
 	LeaderString*head;
