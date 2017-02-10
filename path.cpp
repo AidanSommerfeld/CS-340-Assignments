@@ -3,14 +3,14 @@
 #include <fstream>
 using namespace std;
 
-void Dijkstras::initialization(Leader a[], int& startVertex)
+void Dijkstras::initialization(Leader a[])
 {
-	for (int i = 1; i < arrayLength; i++)
+	for (int i = 1; i < (9-1); i++)
 	{
 		a[i].vertex = 0;
 		a[i].known = false;
-		a[i].distance = INT_MAX;
-		a[i].firstFollower = nullptr;
+		a[i].distance = HIGH_VALUE;
+		a[i].firstFollower = NULL;
 	}
 	ifstream inFile;
 	inFile.open("inputs.txt");
@@ -30,27 +30,28 @@ void Dijkstras::initialization(Leader a[], int& startVertex)
 
 }
 
-void Dijkstras::search(Leader a[], int& startVertex)
+void Dijkstras::search(Leader a[], int startVertex)
 {
 	a[startVertex].vertex = startVertex;
 	a[startVertex].distance = 0;
-	int nextVertex;
 	while (true)
 	{
 		int i = findNextVertex(a);
-		if (i == -1)
-			break;
+		if (i == VALUE_NOT_FOUND)
+		{
+			return;
+		}
 
 		a[i].known = true;
 		Follower* p = a[i].firstFollower;
 
-		while (p != nullptr)
+		while (p != NULL)
 		{
 			if (a[p->vertex].known == false)
 			{
-				if (a[i].distance + p->distance < a[p->vertex].distance)
+				if ((a[i].distance + p->distance) < a[p->vertex].distance)
 				{
-					a[p->vertex].distance = a[i].distance + p->distance;
+					a[p->vertex].distance = (a[i].distance + p->distance);
 					a[p->vertex].vertex = i;
 				}
 			}
@@ -62,12 +63,12 @@ void Dijkstras::search(Leader a[], int& startVertex)
 
 int Dijkstras::findNextVertex(Leader a[])
 {
-	int nextVertex = -1;
-	int shortestDistance = INT_MAX;
+	int nextVertex = VALUE_NOT_FOUND;
+	int shortestDistance = HIGH_VALUE;
 
-	for (int i = 1; i < arrayLength; i++)
+	for (int i = 1; i < (9-1); i++)
 	{
-		if (a[i].distance < shortestDistance && a[i].known == false)
+		if ((a[i].distance < shortestDistance) && (a[i].known == false))
 		{
 			nextVertex = i;
 			shortestDistance = a[i].distance;
@@ -78,7 +79,7 @@ int Dijkstras::findNextVertex(Leader a[])
 
 void Dijkstras::paths(Leader a[])
 {
-	for (int i = 1; i < arrayLength; i++)
+	for (int i = 1; i < (9-1); i++)
 	{
 		int j = i;
 		while (j != a[j].vertex)
@@ -93,20 +94,20 @@ void Dijkstras::paths(Leader a[])
 
 Dijkstras::Dijkstras()
 {
-	initialization(a, startVertex);
+	initialization(a);
 	search(a, startVertex);
 	paths(a);
 
 }
 
 ///////////////////////////////////////////////
-void Floyds::initialization(int d[][7], int v[][7], int n)
+void Floyds::initialization(int d[][FLOYD_SIZE], int v[][FLOYD_SIZE], int n)
 {
 	for (int i = 1; i < n; i++)
 	{
 		for (int j = 1; j < n; j++)
 		{
-			d[i][j] = INT_MAX;
+			d[i][j] = HIGH_VALUE;
 			v[i][j] = i;
 			if (i == j)
 			{
@@ -133,21 +134,23 @@ void Floyds::initialization(int d[][7], int v[][7], int n)
 	return;
 }
 
-void Floyds::search(int d[][7], int v[][7], int n)
+void Floyds::search(int d[][FLOYD_SIZE], int v[][FLOYD_SIZE], int n)
 {
 	for (int k = 1; k < n; k++)
 	{
 		for (int i = 1; i < n; i++)
 		{
-			if (i == k || d[i][k] == INT_MAX)
-				continue;
+			if (i == k || d[i][k] == HIGH_VALUE)
+			{
+
+			}
 			else
 			{
 				for (int j = 1; j < n; j++)
 				{
-					if (i == j || j == k || d[k][j] == INT_MAX)
+					if (i == j || j == k || d[k][j] == HIGH_VALUE)
 					{
-						continue;
+						
 					}
 					if (d[i][k] + d[k][j] < d[i][j])
 					{
@@ -162,32 +165,35 @@ void Floyds::search(int d[][7], int v[][7], int n)
 	return;
 }
 
-void Floyds::paths(int d[][7], int v[][7], int i, int j)
+void Floyds::paths(int d[][FLOYD_SIZE], int v[][FLOYD_SIZE], int i, int j)
 {
 	int length = d[i][j];
 	cout << j;
 	while (i != v[i][j])
 	{
-		cout << "<-" << endl;
+		cout << "<-";
 		cout << v[i][j];
 		j = v[i][j];
 	}
-	cout << "< -";
+	cout << "<-";
 	cout << i;
 	cout << "(LENGTH =";
 	cout << length;
 	cout << ")" << endl;
+
 }
 
 Floyds::Floyds()
 {
-	initialization(d, v, n);
-	search(d, v, n);
+	initialization(d, v, FLOYD_SIZE);
+
+	search(d, v, FLOYD_SIZE);
+
 	for (int i = 1; i < n; i++)
 	{
-		for (int j = 1; j < n; j++)
+		for (int j = 1; j <  n; j++)
 		{
-			if (i != j && d[i][j] != INT_MAX)
+			if (i != j && d[i][j] != HIGH_VALUE)
 			{
 				paths(d, v, i, j);
 			}
