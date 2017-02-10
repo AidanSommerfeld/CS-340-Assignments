@@ -58,6 +58,7 @@ public:
 	void TopSort::PartialOrder(Leader*&head, Leader*&tail, int vertexCount);
 	void TopSort::GetDepths(Leader*&head, Leader*&tail);
 	void TopSort::Print(Leader*&head, Leader*&tail);
+	void TopSort::ShowStructure(Leader *head, Leader *tail); // Pass-by-value for a good reason
 
 private:
 	Leader*head;
