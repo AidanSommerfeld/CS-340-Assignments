@@ -185,6 +185,7 @@ TopSort::TopSort()
 	initialization(head, tail, vertexCount);
 	GetDepths(head, tail);
 	Print(head, tail);
+	ShowStructure(head, tail);
 	FindStartVertex(head, tail);
 	PartialOrder(head, tail, vertexCount);
 	if (vertexCount != 0)
@@ -335,12 +336,45 @@ void TopSortString::Print(LeaderString*&head, LeaderString*&tail)
 	cout << endl;
 }
 
+void TopSortString::ShowStructure (LeaderString *head, LeaderString *tail) // Do NOT pass this by reference 
+{
+	int currentLeader = 1;
+	
+	// Notes: these are all struct fields or otherwise accessible.
+	
+	while (head != tail)
+	{
+		cout << "Leader " << currentLeader << endl;
+		cout << "inDegree: " << head->inDegree << endl;
+		cout << "nextLeader: " << head->nextLeader->data << endl;				
+		
+		if (head->firstFollower != nullptr) // If current vertex has any followers then
+		{
+			Leader* current = head->firstFollower; // Should set this to find current vertex.
+			
+			int currFollower = 1;
+			
+			while (curr->nextFollower != nullptr) 
+			{
+				cout << "Follower " << currFollower << ": " << current->firstFollower->adjacentLeader->data << endl;
+				currFollower++;
+				current = current->nextFollower;
+			}
+		}
+		
+		head = head->nextLeader;
+		currentLeader++;
+		cout << endl << endl;
+	}
+}
+
 TopSortString::TopSortString()
 {
 	vertexCount = 0;
 	initialization(head, tail, vertexCount);
 	GetDepths(head, tail);
 	Print(head, tail);
+	ShowStructure(head, tail);
 	FindStartVertex(head, tail);
 	PartialOrder(head, tail, vertexCount);
 	if (vertexCount != 0)
